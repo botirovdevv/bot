@@ -1,18 +1,15 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
+const app = express();
 
 // Tokeningizni bu yerga kiriting
 const BOT_TOKEN = '7947398284:AAFGL1fg3_ffuOVVDr5aiXQbogVVCoq0LHw';
 const CHANNEL_ID = '@iphone_sticker'; // Kanal nomi yoki ID
 
+// Telegram botni yaratish
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
-const app = express();
-
-// Heroku yoki Render tomonidan taqdim etilgan portni olish
-const port = process.env.PORT || 3000;
-
-// Foydalanuvchidan "/start" komandasini olish
+// /start komandasiga javob berish
 bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
 
@@ -36,9 +33,16 @@ bot.onText(/\/start/, async (msg) => {
   }
 });
 
-// Express serverni ishga tushurish
-app.listen(port, () => {
-  console.log(`Server ${port} portda ishlamoqda...`);
+// Web-serverni yaratish va ishlashini tekshirish
+app.get('/', (req, res) => {
+  res.send('Telegram bot is live!'); // Bu saytni Render'da ko'rish mumkin
 });
 
-console.log('Bot ishga tushdi');
+// Serverni ishga tushurish
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server is running...');
+});
+
+// Webhookni o'rnatish (botni telegram serveriga bog'lash)
+bot.setWebHook('https://bot-8r9d.onrender.com/' + BOT_TOKEN);
+
