@@ -1,4 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
+const express = require('express');
 
 // Tokeningizni bu yerga kiriting
 const BOT_TOKEN = '7947398284:AAFGL1fg3_ffuOVVDr5aiXQbogVVCoq0LHw';
@@ -6,6 +7,12 @@ const CHANNEL_ID = '@iphone_sticker'; // Kanal nomi yoki ID
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
+const app = express();
+
+// Heroku yoki Render tomonidan taqdim etilgan portni olish
+const port = process.env.PORT || 3000;
+
+// Foydalanuvchidan "/start" komandasini olish
 bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
 
@@ -29,4 +36,9 @@ bot.onText(/\/start/, async (msg) => {
   }
 });
 
-console.log('ishladii');
+// Express serverni ishga tushurish
+app.listen(port, () => {
+  console.log(`Server ${port} portda ishlamoqda...`);
+});
+
+console.log('Bot ishga tushdi');
