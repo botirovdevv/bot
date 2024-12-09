@@ -2,11 +2,9 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const app = express();
 
-// Tokeningizni bu yerga kiriting
-const BOT_TOKEN = '7947398284:AAFGL1fg3_ffuOVVDr5aiXQbogVVCoq0LHw'; // Hozircha shunday qoldiring
-const CHANNEL_ID = '@ForStory7'; // Kanal nomi yoki ID
+const BOT_TOKEN = '5884221547:AAE5de-gp2j5Sgh8GQ5F4zsbIJdsqbMIB-c'; 
+const CHANNEL_ID = '@ForStory7'; 
 
-// Telegram botni yaratish (polling o'rniga webhookni ishlatish uchun)
 const bot = new TelegramBot(BOT_TOKEN, { polling: false });  // polling: false qilib o'zgartiring
 
 // /start komandasiga javob berish
@@ -14,14 +12,13 @@ bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
 
   try {
-    // Foydalanuvchining obuna holatini tekshirish
     const member = await bot.getChatMember(CHANNEL_ID, chatId);
     if (['member', 'administrator', 'creator'].includes(member.status)) {
-      bot.sendMessage(chatId, 'Rahmat! Siz kanalda obuna bo‘lgansiz.');
+      bot.sendMessage(chatId, 'Rahmat! Siz kanalda obuna bo‘lgansiz va kanalimizdan foydalanishingiz mumkin');
     } else {
       bot.sendMessage(
         chatId,
-        `Botdan foydalanish uchun ushbu kanalda obuna bo'ling: ${CHANNEL_ID}`
+        `Botdan foydalanish uchun ushbu kanalda obuna bo'ling: ${CHANNEL_ID} va qaytadan /start buyurug'ini yuboring`
       );
     }
   } catch (error) {
