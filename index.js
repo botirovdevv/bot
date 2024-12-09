@@ -2,7 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const app = express();
 
-const BOT_TOKEN = '5884221547:AAE5de-gp2j5Sgh8GQ5F4zsbIJdsqbMIB-c'; 
+const BOT_TOKEN = '7201530441:AAF9MEY8KKfU22O3Uhh0SRuRGtNz4nKo-P8'; 
 const CHANNEL_ID = '@ForStory7'; 
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: false });  // polling: false qilib o'zgartirdik
