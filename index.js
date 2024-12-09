@@ -5,7 +5,7 @@ const app = express();
 const BOT_TOKEN = '5884221547:AAE5de-gp2j5Sgh8GQ5F4zsbIJdsqbMIB-c'; 
 const CHANNEL_ID = '@ForStory7'; 
 
-const bot = new TelegramBot(BOT_TOKEN, { polling: false });  // polling: false qilib o'zgartiring
+const bot = new TelegramBot(BOT_TOKEN, { polling: false });  // polling: false qilib o'zgartirdik
 
 // /start komandasiga javob berish
 bot.onText(/\/start/, async (msg) => {
@@ -41,4 +41,5 @@ app.listen(process.env.PORT || 3000, () => {
 });
 
 // Webhookni o'rnatish (botni telegram serveriga bog'lash)
+// Ushbu sozlama faqat botni bir marta o'rnatishda kerak
 bot.setWebHook('https://bot-8r9d.onrender.com/' + BOT_TOKEN);
