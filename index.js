@@ -2,16 +2,18 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const app = express();
 
-const BOT_TOKEN = '7201530441:AAF9MEY8KKfU22O3Uhh0SRuRGtNz4nKo-P8'; 
-const CHANNEL_ID = '@ForStory7'; 
+// Eski bot tokenini bu yerga kiriting
+const BOT_TOKEN = '7947398284:AAFGL1fg3_ffuOVVDr5aiXQbogVVCoq0LHw'; // Eski tokenni bu yerga yozing
+const CHANNEL_ID = '@ForStory7';  // Kanal nomini yoki ID sini o'zgartiring
 
-const bot = new TelegramBot(BOT_TOKEN, { polling: false });  // polling: false qilib o'zgartirdik
+const bot = new TelegramBot(BOT_TOKEN, { polling: false });  // polling: false qilib o'zgartiring
 
 // /start komandasiga javob berish
 bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
 
   try {
+    // Kanalga obuna bo'lish holatini tekshirish
     const member = await bot.getChatMember(CHANNEL_ID, chatId);
     if (['member', 'administrator', 'creator'].includes(member.status)) {
       bot.sendMessage(chatId, 'Rahmat! Siz kanalda obuna bo‘lgansiz va kanalimizdan foydalanishingiz mumkin');
@@ -41,5 +43,8 @@ app.listen(process.env.PORT || 3000, () => {
 });
 
 // Webhookni o'rnatish (botni telegram serveriga bog'lash)
-// Ushbu sozlama faqat botni bir marta o'rnatishda kerak
-bot.setWebHook('https://bot-8r9d.onrender.com/' + BOT_TOKEN);
+bot.setWebHook('https://bot-8r9d.onrender.com/' + BOT_TOKEN).then(() => {
+  console.log('Webhook o\'rnatildi');
+}).catch(error => {
+  console.error('Webhookni o\'rnatishda xato:', error);
+});
